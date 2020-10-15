@@ -1,6 +1,9 @@
 import random
 import requests
 import json
+from flask import Flask
+
+
 
 def getWords(path):   
     words = open(path, "rb").readlines()
@@ -46,33 +49,18 @@ def getImage(q):
     url = "https://api.cognitive.microsoft.com/bing/v7.0/images/search?mkt=en-us&q=" + q
     headers = { "ocp-apim-subscription-key" : "" }
     return requests.get(url, headers=headers).json()["value"][0]["thumbnailUrl"]
-#    return requests.get(url, headers=headers)
 
 d = getWords("mobypos.txt")
 
-#print rws(d, "AN") + " and " + rws(d, "AN")
-#print "I " + rw(d, "V") + " to " + rw(d, "V")
-#print rws(d, "NNN")
-
-#print getImage(rw(d, "N")).json()["value"][0]["thumbnailUrl"]
-#print getImage(rw(d, "N")).json()["value"][0]["thumbnailUrl"]
-#print getImage(rw(d, "N")).json()["value"][0]["thumbnailUrl"]
-
-ec = "The " + rws(d, "ANV") + " the " + rws(d, "AN")
-
-#print ec
-
-from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
     rws2 = [rw(d, "N"), rw(d, "N"), rw(d, "N")]
     imgs = [ getImage(rws2[0]), getImage(rws2[1]), getImage(rws2[2]) ]
-    html = '{rws2[0]} {rws2[1]} {rws2[2]} <div class="images"><img src="{img1}"> <img src="{img2}"><img src="{img3}"></div>'.format(rws2=rws2, img1=imgs[0], img2=imgs[1], img3=imgs[2])
     colors = ["#adccff", "#b7fff9", "#c6b5ff", "#ffccfb", "#e8ffcc", "#ffe4cc"]
 
-    html2 = """
+    html = """
         <html>
             <head>
                 <style>
@@ -100,5 +88,5 @@ def hello_world():
         </html>
     """.format(randomColor=random.choice(colors), rws2=rws2, img1=imgs[0], img2=imgs[1], img3=imgs[2])
 
-    return html2
+    return html
 
