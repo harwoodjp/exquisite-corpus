@@ -48,6 +48,7 @@ def rws(d, ts):
 def getImage(q):
     url = "https://api.cognitive.microsoft.com/bing/v7.0/images/search?mkt=en-us&q=" + q
     headers = { "ocp-apim-subscription-key" : "" }
+    print requests.get(url, headers=headers).json()
     return requests.get(url, headers=headers).json()["value"][0]["thumbnailUrl"]
 
 d = getWords("mobypos.txt")
