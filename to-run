@@ -1,0 +1,1 @@
+sudo docker run -it -p 1993:1993 <image-id>
