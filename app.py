@@ -66,8 +66,20 @@ def main():
 
     return """
         <html>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=.8">        
             <head>
                 <style>
+                    @media only screen and (max-width: 800px) {{
+                        .images {{
+                            flex-direction: column;
+                        }}
+                        img {{
+                            max-width: 55vw !important;
+                            max-height: 100% !important;
+                        }}
+                    }}
+
                     body {{
                         background-color: {randomColor}
                     }}
