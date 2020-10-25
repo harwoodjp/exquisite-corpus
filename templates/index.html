@@ -1,0 +1,39 @@
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=.8">        
+    <head>
+        <style>
+            @media only screen and (max-width: 800px) {
+                .images {
+                    flex-direction: column;
+                }
+                img {
+                    max-width: 55vw !important;
+                    max-height: 100% !important;
+                }
+            }
+
+            body {
+                background-color: {{randomColor}}
+            }
+            .images {
+                display: flex;
+                padding: 1em;
+            }
+            img {
+                align-self: flex-start;
+                max-height: 22vw;
+                max-width: 29%;
+                padding: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        {{words[0]}} {{words[1]}} {{words[2]}}
+        <div class="images">
+            <img src="{{img1}}"> 
+            <img src="{{img2}}">
+            <img src="{{img3}}">
+        </div>
+    </body>
+</html>

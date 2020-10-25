@@ -1,7 +1,7 @@
 import random
 import requests
 import json
-from flask import Flask
+from flask import Flask, render_template
 
 def getDict(path):   
     pairs = []
@@ -64,44 +64,7 @@ def main():
     words = rw(d, "NNN").split(",")
     imgs = [getImage(words[0]), getImage(words[1]), getImage(words[2])]
 
-    return """
-        <html>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=.8">        
-            <head>
-                <style>
-                    @media only screen and (max-width: 800px) {{
-                        .images {{
-                            flex-direction: column;
-                        }}
-                        img {{
-                            max-width: 55vw !important;
-                            max-height: 100% !important;
-                        }}
-                    }}
-
-                    body {{
-                        background-color: {randomColor}
-                    }}
-                    .images {{
-                        display: flex;
-                        padding: 1em;
-                    }}
-                    img {{
-                        align-self: flex-start;
-                        max-height: 22vw;
-                        max-width: 29%;
-                        padding: 1em;
-                    }}
-                </style>
-            </head>
-            <body>
-                {words[0]} {words[1]} {words[2]} 
-                <div class="images">
-                    <img src="{img1}"> 
-                    <img src="{img2}">
-                    <img src="{img3}">
-                </div>
-            </body>
-        </html>
-    """.format(randomColor=random.choice(colors), words=words, img1=imgs[0], img2=imgs[1], img3=imgs[2])
+    return render_template("index.html", randomColor=random.choice(colors), words=words, img1=imgs[0], img2=imgs[1], img3=imgs[2])
+@app.route('/example/<num>')
+def example(num):
+    return render_template("examples/example{num}.html".format(num=num))
