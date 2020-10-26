@@ -65,6 +65,13 @@ def main():
     imgs = [getImage(words[0]), getImage(words[1]), getImage(words[2])]
 
     return render_template("index.html", randomColor=random.choice(colors), words=words, img1=imgs[0], img2=imgs[1], img3=imgs[2])
+
+@app.route('/<word1>/<word2>/<word3>')
+def words(word1, word2, word3):
+    imgs = [getImage(word1), getImage(word2), getImage(word3)]
+    return render_template("index.html", randomColor=random.choice(colors), words=[word1, word2, word3], img1=imgs[0], img2=imgs[1], img3=imgs[2])
+
+
 @app.route('/example/<num>')
 def example(num):
     return render_template("examples/example{num}.html".format(num=num))
